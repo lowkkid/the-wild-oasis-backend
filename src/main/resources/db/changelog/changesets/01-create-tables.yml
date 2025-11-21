@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: createGuestsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE guests (
+                id SERIAL PRIMARY KEY ,
+                full_name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL UNIQUE,
+                nationality VARCHAR(100),
+                national_id VARCHAR(50) NOT NULL UNIQUE,
+                created_at TIMESTAMP DEFAULT now()
+              );
+  - changeSet:
+      id: createCabinsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE cabins (
+                id SERIAL PRIMARY KEY ,
+                name VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT now(),
+                max_capacity SMALLINT NOT NULL,
+                regular_price NUMERIC(7, 2) NOT NULL,
+                discount SMALLINT DEFAULT 0,
+                description TEXT NOT NULL,
+                image BYTEA
+              );
+  - changeSet:
+      id: createSettingsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE settings (
+                id SERIAL PRIMARY KEY ,
+                min_booking_length SMALLINT NOT NULL,
+                max_booking_length SMALLINT NOT NULL,
+                max_guests_per_booking SMALLINT NOT NULL,
+                breakfast_price NUMERIC(7, 2) NOT NULL,
+                created_at TIMESTAMP DEFAULT now()
+              );
+  - changeSet:
+      id: createBookingsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE bookings (
+                id SERIAL PRIMARY KEY,
+                start_date TIMESTAMP NOT NULL,
+                end_date TIMESTAMP NOT NULL,
+                num_nights SMALLINT NOT NULL,
+                num_guests SMALLINT NOT NULL,
+                cabin_price NUMERIC(7,2) NOT NULL,
+                extras_price NUMERIC(7,2) DEFAULT 0,
+                total_price NUMERIC(7,2) NOT NULL,
+                status VARCHAR(255) NOT NULL,
+                has_breakfast BOOLEAN NOT NULL,
+                is_paid BOOLEAN NOT NULL,
+                observations TEXT,
+                cabin_id INTEGER NOT NULL,
+                guest_id INTEGER NOT NULL,
+                created_at TIMESTAMP DEFAULT now(),
+
+                -- Правильное объявление Foreign Keys
+                CONSTRAINT fk_bookings_cabin 
+                    FOREIGN KEY (cabin_id) REFERENCES cabins(id),
+                CONSTRAINT fk_bookings_guest 
+                    FOREIGN KEY (guest_id) REFERENCES guests(id)
+              );

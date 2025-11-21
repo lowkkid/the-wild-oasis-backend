@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: populateCabinsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO cabins (name, max_capacity, regular_price, discount, description, image)
+                VALUES ('001', 2, 250.00, 50, 'Small luxury cabin in the woods', NULL);
+  - changeSet:
+      id: populateGuestsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO guests (full_name, email, nationality, national_id)
+              VALUES ('Vladislav Shikunov', 'lowkkid@example.com', 'belarusian', 'AB1234567');
+  - changeSet:
+      id: populateSettingsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO settings (min_booking_length, max_booking_length, max_guests_per_booking, breakfast_price)
+              VALUES (3, 90, 8, 15.00);
+  - changeSet:
+      id: populateBookingsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO bookings (
+                  start_date, 
+                  end_date, 
+                  num_nights, 
+                  num_guests, 
+                  cabin_price,
+                  extras_price,
+                  total_price, 
+                  status, 
+                  has_breakfast, 
+                  is_paid, 
+                  observations, 
+                  cabin_id, 
+                  guest_id
+              ) VALUES (
+                  '2025-12-01 14:00:00',
+                  '2025-12-05 12:00:00',
+                  4,
+                  2,
+                  300.00,
+                  30.00,
+                  330.00,
+                  'unconfirmed',
+                  true,
+                  true,
+                  'Early check-in requested',
+                  1,
+                  1
+              );

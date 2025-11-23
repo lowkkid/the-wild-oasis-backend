@@ -40,8 +40,7 @@ public class Cabin {
     @Column(nullable = false)
     private String description;
 
-    @Lob
     @Column
-    private byte[] image;
+    private String image;
 }
 

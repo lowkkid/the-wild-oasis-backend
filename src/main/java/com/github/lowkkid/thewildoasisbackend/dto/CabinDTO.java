@@ -20,6 +20,6 @@ public class CabinDTO {
     private BigDecimal regularPrice;
     private Short discount;
     private String description;
-    private byte[] image;
+    private String image;
 }
 

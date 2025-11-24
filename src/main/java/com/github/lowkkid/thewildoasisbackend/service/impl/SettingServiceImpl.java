@@ -60,4 +60,3 @@ public class SettingServiceImpl implements SettingService {
         settingRepository.delete(setting);
     }
 }
-

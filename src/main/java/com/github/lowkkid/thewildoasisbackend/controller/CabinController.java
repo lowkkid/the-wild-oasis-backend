@@ -1,12 +1,13 @@
 package com.github.lowkkid.thewildoasisbackend.controller;
 
+import com.github.lowkkid.thewildoasisbackend.dto.CabinCreateRequest;
 import com.github.lowkkid.thewildoasisbackend.dto.CabinDTO;
 import com.github.lowkkid.thewildoasisbackend.service.CabinService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,9 +29,9 @@ public class CabinController {
         return ResponseEntity.ok(cabin);
     }
 
-    @PostMapping
-    public ResponseEntity<CabinDTO> create(@RequestBody CabinDTO cabinDTO) {
-        CabinDTO createdCabin = cabinService.create(cabinDTO);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<CabinDTO> create(@ModelAttribute CabinCreateRequest request) {
+        CabinDTO createdCabin = cabinService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCabin);
     }
 

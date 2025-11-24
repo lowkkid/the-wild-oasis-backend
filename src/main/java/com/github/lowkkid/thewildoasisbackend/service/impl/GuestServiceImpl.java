@@ -60,4 +60,3 @@ public class GuestServiceImpl implements GuestService {
         guestRepository.delete(guest);
     }
 }
-

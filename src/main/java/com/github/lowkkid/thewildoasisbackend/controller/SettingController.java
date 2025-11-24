@@ -46,4 +46,3 @@ public class SettingController {
         return ResponseEntity.noContent().build();
     }
 }
-

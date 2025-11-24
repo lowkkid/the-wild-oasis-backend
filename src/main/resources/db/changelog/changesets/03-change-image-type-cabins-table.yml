@@ -5,4 +5,4 @@ databaseChangeLog:
       changes:
         - sql:
             sql: |
-              ALTER TABLE cabins ALTER COLUMN image TYPE VARCHAR(255);
+              ALTER TABLE cabins ALTER COLUMN image TYPE TEXT;

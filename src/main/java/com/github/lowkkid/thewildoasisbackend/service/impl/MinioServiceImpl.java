@@ -39,7 +39,7 @@ public class MinioServiceImpl implements MinioService {
             minioClient.putObject(args);
             return generateDownloadUrl(objectName);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to upload file", e);
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

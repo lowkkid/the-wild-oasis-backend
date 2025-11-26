@@ -21,42 +21,22 @@ public class SettingServiceImpl implements SettingService {
     private final SettingMapper settingMapper;
 
     @Override
-    public List<SettingDTO> getAll() {
-        return settingRepository.findAll().stream()
-                .map(settingMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public SettingDTO getById(Long id) {
-        Setting setting = settingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Setting with id " + id + " not found"));
-        return settingMapper.toDto(setting);
+    public SettingDTO get() {
+        return settingMapper.toDto(getSetting());
     }
 
     @Override
     @Transactional
-    public SettingDTO create(SettingDTO settingDTO) {
-        Setting setting = settingMapper.toEntity(settingDTO);
-        Setting savedSetting = settingRepository.save(setting);
-        return settingMapper.toDto(savedSetting);
-    }
-
-    @Override
-    @Transactional
-    public SettingDTO update(Long id, SettingDTO settingDTO) {
-        Setting existingSetting = settingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Setting with id " + id + " not found"));
+    public SettingDTO update(SettingDTO settingDTO) {
+        Setting existingSetting = getSetting();
         Setting setting = settingMapper.toEntity(settingDTO);
         setting.setId(existingSetting.getId());
         Setting savedSetting = settingRepository.save(setting);
         return settingMapper.toDto(savedSetting);
     }
 
-    @Override
-    public void delete(Long id) {
-        Setting setting = settingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Setting with id " + id + " not found"));
-        settingRepository.delete(setting);
+    private Setting getSetting() {
+        return settingRepository.findAll().stream()
+                .findFirst().orElseThrow(() -> new NotFoundException("Settings with not found"));
     }
 }

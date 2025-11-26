@@ -2,7 +2,9 @@ package com.github.lowkkid.thewildoasisbackend.controller;
 
 import com.github.lowkkid.thewildoasisbackend.dto.CabinCreateRequest;
 import com.github.lowkkid.thewildoasisbackend.dto.CabinDTO;
+import com.github.lowkkid.thewildoasisbackend.dto.CabinEditRequest;
 import com.github.lowkkid.thewildoasisbackend.service.CabinService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,14 +32,14 @@ public class CabinController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<CabinDTO> create(@ModelAttribute CabinCreateRequest request) {
+    public ResponseEntity<CabinDTO> create(@ModelAttribute  @Valid CabinCreateRequest request) {
         CabinDTO createdCabin = cabinService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCabin);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CabinDTO> update(@PathVariable Long id, @RequestBody CabinDTO cabinDTO) {
-        CabinDTO updatedCabin = cabinService.update(id, cabinDTO);
+    @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<CabinDTO> update(@PathVariable Long id, @ModelAttribute CabinEditRequest request) {
+        CabinDTO updatedCabin = cabinService.update(id, request);
         return ResponseEntity.ok(updatedCabin);
     }
 

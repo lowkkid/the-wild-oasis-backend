@@ -2,6 +2,7 @@ package com.github.lowkkid.thewildoasisbackend.service.impl;
 
 import com.github.lowkkid.thewildoasisbackend.dto.CabinCreateRequest;
 import com.github.lowkkid.thewildoasisbackend.dto.CabinDTO;
+import com.github.lowkkid.thewildoasisbackend.dto.CabinEditRequest;
 import com.github.lowkkid.thewildoasisbackend.entity.Cabin;
 import com.github.lowkkid.thewildoasisbackend.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.mapper.CabinMapper;
@@ -12,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,10 +24,10 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class CabinServiceImpl implements CabinService {
 
     private static final String CABIN_IMAGES_PREFIX = "cabins/";
-    private static final Logger log = LoggerFactory.getLogger(CabinServiceImpl.class);
 
     private final CabinRepository cabinRepository;
     private final CabinMapper cabinMapper;
@@ -50,6 +52,9 @@ public class CabinServiceImpl implements CabinService {
     public CabinDTO create(CabinCreateRequest cabinCreateRequest) {
         Cabin cabin = cabinMapper.toEntity(cabinCreateRequest);
         Cabin savedCabin = cabinRepository.save(cabin);
+        if (cabinCreateRequest.getImage() == null) {
+            return cabinMapper.toDto(savedCabin);
+        }
         String url = minioService.uploadFile(cabinCreateRequest.getImage(), CABIN_IMAGES_PREFIX + savedCabin.getId());
         savedCabin.setImage(url);
         return cabinMapper.toDto(cabinRepository.save(savedCabin));
@@ -57,11 +62,19 @@ public class CabinServiceImpl implements CabinService {
 
     @Override
     @Transactional
-    public CabinDTO update(Long id, CabinDTO cabinDTO) {
+    public CabinDTO update(Long id, CabinEditRequest cabinEditRequest) {
         Cabin existingCabin = cabinRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cabin with id " + id + " not found"));
-        Cabin cabin = cabinMapper.toEntity(cabinDTO);
+        Cabin cabin = cabinMapper.toEntity(cabinEditRequest);
         cabin.setId(existingCabin.getId());
+        if (cabinEditRequest.getImage() == null) {
+            cabin.setImage(existingCabin.getImage());
+        } else {
+            minioService.deleteFile(CABIN_IMAGES_PREFIX + cabin.getId());
+            String url = minioService.uploadFile(cabinEditRequest.getImage(),
+                    CABIN_IMAGES_PREFIX + existingCabin.getId());
+            cabin.setImage(url);
+        }
         Cabin savedCabin = cabinRepository.save(cabin);
         return cabinMapper.toDto(savedCabin);
     }

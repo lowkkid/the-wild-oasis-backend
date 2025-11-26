@@ -14,15 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CabinCreateRequest {
+public class CabinEditRequest {
 
+    private Long id;
     @NotBlank(message = "Name is required")
     private String name;
     @NotNull(message = "Max capacity is required")
     @Min(value = 1, message = "Capacity must be at least 1")
     private Short maxCapacity;
     @NotNull(message = "Regular price capacity is required")
-    @Min(value = 1, message = "Regular price  must be at least 1")
+    @Min(value = 1, message = "Regular price must be at least 1")
     private BigDecimal regularPrice;
     private Short discount;
     private String description;

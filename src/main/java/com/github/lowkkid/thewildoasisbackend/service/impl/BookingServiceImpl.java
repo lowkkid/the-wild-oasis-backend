@@ -28,8 +28,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<BookingSummary> getAll(BookingStatus status, String sortField, Sort.Direction sortDirection) {
-        var bookings = bookingRepository.findAllWithCabinsAndGuests(status, Sort.by(sortDirection, sortField));
-        return bookings;
+        return bookingRepository.findAllWithCabinsAndGuests(status, Sort.by(sortDirection, sortField));
     }
 
     @Override

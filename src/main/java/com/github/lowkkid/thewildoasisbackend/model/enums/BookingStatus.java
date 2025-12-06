@@ -15,4 +15,13 @@ public enum BookingStatus {
     public String toString() {
         return value;
     }
+
+    public static BookingStatus fromValue(String value) {
+        for (BookingStatus status : values()) {
+            if (value.equals(status.value)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Invalid booking status value: " + value);
+    }
 }

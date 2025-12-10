@@ -1,4 +1,4 @@
-package com.github.lowkkid.thewildoasisbackend.repository.projection;
+package com.github.lowkkid.thewildoasisbackend.domain.repository.projection;
 
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
 import lombok.*;

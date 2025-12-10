@@ -1,9 +1,9 @@
 package com.github.lowkkid.thewildoasisbackend.mapper;
 
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
-import com.github.lowkkid.thewildoasisbackend.entity.Booking;
-import com.github.lowkkid.thewildoasisbackend.entity.Cabin;
-import com.github.lowkkid.thewildoasisbackend.entity.Guest;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Booking;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Cabin;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Guest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 

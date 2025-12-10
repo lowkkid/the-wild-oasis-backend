@@ -1,4 +1,4 @@
-package com.github.lowkkid.thewildoasisbackend.entity;
+package com.github.lowkkid.thewildoasisbackend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

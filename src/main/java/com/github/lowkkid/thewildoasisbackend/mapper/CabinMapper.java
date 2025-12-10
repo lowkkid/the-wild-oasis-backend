@@ -3,7 +3,7 @@ package com.github.lowkkid.thewildoasisbackend.mapper;
 import com.github.lowkkid.thewildoasisbackend.model.CabinCreateRequest;
 import com.github.lowkkid.thewildoasisbackend.model.CabinDTO;
 import com.github.lowkkid.thewildoasisbackend.model.CabinEditRequest;
-import com.github.lowkkid.thewildoasisbackend.entity.Cabin;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Cabin;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

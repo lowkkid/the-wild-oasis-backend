@@ -1,14 +1,14 @@
 package com.github.lowkkid.thewildoasisbackend.service.impl;
 
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
-import com.github.lowkkid.thewildoasisbackend.entity.Booking;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Booking;
 import com.github.lowkkid.thewildoasisbackend.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.mapper.BookingMapper;
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
-import com.github.lowkkid.thewildoasisbackend.repository.BookingRepository;
-import com.github.lowkkid.thewildoasisbackend.repository.CabinRepository;
-import com.github.lowkkid.thewildoasisbackend.repository.GuestRepository;
-import com.github.lowkkid.thewildoasisbackend.repository.projection.BookingSummary;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.BookingRepository;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.CabinRepository;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.GuestRepository;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.projection.BookingSummary;
 import com.github.lowkkid.thewildoasisbackend.service.BookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

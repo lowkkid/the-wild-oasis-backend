@@ -1,4 +1,4 @@
-package com.github.lowkkid.thewildoasisbackend.entity;
+package com.github.lowkkid.thewildoasisbackend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,8 +25,9 @@ public class Guest {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(length = 100)
-    private String nationality;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
 
     @Column(name = "national_id", nullable = false, unique = true)
     private String nationalId;

@@ -1,6 +1,6 @@
-package com.github.lowkkid.thewildoasisbackend.repository;
+package com.github.lowkkid.thewildoasisbackend.domain.repository;
 
-import com.github.lowkkid.thewildoasisbackend.entity.Cabin;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Cabin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

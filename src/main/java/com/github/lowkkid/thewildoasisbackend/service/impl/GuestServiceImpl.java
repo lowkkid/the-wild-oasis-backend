@@ -1,10 +1,10 @@
 package com.github.lowkkid.thewildoasisbackend.service.impl;
 
 import com.github.lowkkid.thewildoasisbackend.model.GuestDTO;
-import com.github.lowkkid.thewildoasisbackend.entity.Guest;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Guest;
 import com.github.lowkkid.thewildoasisbackend.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.mapper.GuestMapper;
-import com.github.lowkkid.thewildoasisbackend.repository.GuestRepository;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.GuestRepository;
 import com.github.lowkkid.thewildoasisbackend.service.GuestService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

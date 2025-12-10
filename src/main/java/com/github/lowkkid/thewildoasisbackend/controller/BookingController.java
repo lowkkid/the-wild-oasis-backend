@@ -2,7 +2,7 @@ package com.github.lowkkid.thewildoasisbackend.controller;
 
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
-import com.github.lowkkid.thewildoasisbackend.repository.projection.BookingSummary;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.projection.BookingSummary;
 import com.github.lowkkid.thewildoasisbackend.service.BookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

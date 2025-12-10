@@ -1,10 +1,10 @@
 package com.github.lowkkid.thewildoasisbackend.service.impl;
 
 import com.github.lowkkid.thewildoasisbackend.model.SettingDTO;
-import com.github.lowkkid.thewildoasisbackend.entity.Setting;
+import com.github.lowkkid.thewildoasisbackend.domain.entity.Setting;
 import com.github.lowkkid.thewildoasisbackend.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.mapper.SettingMapper;
-import com.github.lowkkid.thewildoasisbackend.repository.SettingRepository;
+import com.github.lowkkid.thewildoasisbackend.domain.repository.SettingRepository;
 import com.github.lowkkid.thewildoasisbackend.service.SettingService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

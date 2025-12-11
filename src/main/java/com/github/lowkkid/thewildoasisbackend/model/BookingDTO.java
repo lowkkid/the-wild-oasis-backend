@@ -1,9 +1,8 @@
 package com.github.lowkkid.thewildoasisbackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,12 +20,17 @@ public class BookingDTO {
     private BigDecimal cabinPrice;
     private BigDecimal extrasPrice;
     private BigDecimal totalPrice;
-    private String status;
+    private BookingStatus status;
     private Boolean hasBreakfast;
     private Boolean isPaid;
     private String observations;
     private CabinDTO cabin;
     private GuestDTO guest;
     private LocalDateTime createdAt;
+
+    @JsonGetter("status")
+    public String getStatusAsString() {
+        return status.toString();
+    }
 }
 

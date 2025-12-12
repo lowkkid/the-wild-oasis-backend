@@ -1,6 +1,7 @@
 package com.github.lowkkid.thewildoasisbackend.service;
 
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
+import com.github.lowkkid.thewildoasisbackend.model.CheckinRequest;
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
 import com.github.lowkkid.thewildoasisbackend.domain.repository.projection.BookingSummary;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ public interface BookingService {
 
     BookingDTO getById(Long id);
 
-    void checkin(Long id);
+    void checkin(Long id, CheckinRequest checkinRequest);
 
     void checkout(Long id);
 

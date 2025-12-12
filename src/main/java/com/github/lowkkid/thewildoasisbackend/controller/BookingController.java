@@ -1,9 +1,11 @@
 package com.github.lowkkid.thewildoasisbackend.controller;
 
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
+import com.github.lowkkid.thewildoasisbackend.model.CheckinRequest;
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
 import com.github.lowkkid.thewildoasisbackend.domain.repository.projection.BookingSummary;
 import com.github.lowkkid.thewildoasisbackend.service.BookingService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -35,8 +37,8 @@ public class BookingController {
     }
 
     @PatchMapping("/{id}/checkin")
-    public ResponseEntity<Void> checkin(@PathVariable Long id) {
-        bookingService.checkin(id);
+    public ResponseEntity<Void> checkin(@PathVariable Long id, @RequestBody @Valid CheckinRequest checkinRequest) {
+        bookingService.checkin(id, checkinRequest);
         return ResponseEntity.noContent().build();
     }
 

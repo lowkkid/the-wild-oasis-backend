@@ -1,9 +1,11 @@
 package com.github.lowkkid.thewildoasisbackend.service.impl;
 
+import com.github.lowkkid.thewildoasisbackend.exception.AlreadyExistsException;
 import com.github.lowkkid.thewildoasisbackend.model.BookingDTO;
 import com.github.lowkkid.thewildoasisbackend.domain.entity.Booking;
 import com.github.lowkkid.thewildoasisbackend.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.mapper.BookingMapper;
+import com.github.lowkkid.thewildoasisbackend.model.CheckinRequest;
 import com.github.lowkkid.thewildoasisbackend.model.enums.BookingStatus;
 import com.github.lowkkid.thewildoasisbackend.domain.repository.BookingRepository;
 import com.github.lowkkid.thewildoasisbackend.domain.repository.CabinRepository;
@@ -34,17 +36,25 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    @Transactional
     public BookingDTO getById(Long id) {
-        Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Booking with id " + id + " not found"));
+        var booking = getEntityById(id);
         return bookingMapper.toDto(booking);
     }
 
     @Override
     @Transactional
-    public void checkin(Long id) {
-        bookingRepository.checkin(id);
+    public void checkin(Long id, CheckinRequest checkinRequest) {
+        var booking = getEntityById(id);
+        booking.setStatus(BookingStatus.CHECKED_IN);
+        booking.setIsPaid(true);
+        if (checkinRequest.getAddBreakfast()) {
+            if (booking.getHasBreakfast()) {
+                throw new AlreadyExistsException("Booking with id " + id + " already has breakfast");
+            }
+            booking.setHasBreakfast(true);
+            booking.setExtrasPrice(checkinRequest.getExtrasPrice());
+            booking.setTotalPrice(checkinRequest.getTotalPrice());
+        }
     }
 
     @Override
@@ -70,8 +80,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public BookingDTO update(Long id, BookingDTO bookingDTO) {
-        Booking existingBooking = bookingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Booking with id " + id + " not found"));
+        var existingBooking = getEntityById(id);
 
         Booking booking = bookingMapper.toEntity(bookingDTO);
         booking.setId(existingBooking.getId());
@@ -88,8 +97,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void delete(Long id) {
-        Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Booking with id " + id + " not found"));
+        var booking = getEntityById(id);
         bookingRepository.delete(booking);
+    }
+
+    private Booking getEntityById(Long id) {
+        return bookingRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Booking with id " + id + " not found"));
     }
 }

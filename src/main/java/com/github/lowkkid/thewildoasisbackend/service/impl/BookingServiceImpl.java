@@ -58,6 +58,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional
     public void checkout(Long id) {
         bookingRepository.checkout(id);
     }

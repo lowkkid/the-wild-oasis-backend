@@ -28,10 +28,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Optional<Booking> findById(@NotNull Long id);
 
     @Modifying
-    @Query("UPDATE Booking b set b.status = 'CHECKED_IN', b.isPaid = true WHERE b.id = :id")
-    void checkin(Long id);
-
-    @Modifying
     @Query("UPDATE Booking b set b.status = 'CHECKED_OUT' WHERE b.id = :id")
     void checkout(Long id);
 }

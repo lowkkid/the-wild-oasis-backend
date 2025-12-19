@@ -3,3 +3,5 @@ databaseChangeLog:
       file: classpath:db/changelog/changesets/01-create-tables.yml
   - include:
       file: classpath:db/changelog/changesets/02-populate-tables.yml
+  - include:
+      file: classpath:db/changelog/changesets/03-create-auth-tables.yml

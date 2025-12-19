@@ -24,10 +24,19 @@ server:
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS}
 
-
 minio:
   endpoint: ${MINIO_ENDPOINT}
   access-key: ${MINIO_ACCESS_KEY}
   secret-key: ${MINIO_SECRET_KEY}
   bucket: ${MINIO_BUCKET}
 
+jwt:
+  secret: ${JWT_SECRET_KEY}
+  expiration-time: ${JWT_EXPIRATION_TIME}
+  expiration-time-unit: ${JWT_EXPIRATION_TIME_UNIT}
+
+refresh-token:
+  expiration-time: ${REFRESH_TOKEN_EXPIRATION_TIME}
+  expiration-time-unit: ${REFRESH_TOKEN_EXPIRATION_TIME_UNIT}
+  absolute-expiration-time: ${REFRESH_TOKEN_ABSOLUTE_EXPIRATION_TIME}
+  absolute-expiration-time-unit: ${REFRESH_TOKEN_ABSOLUTE_EXPIRATION_TIME_UNIT}

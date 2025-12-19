@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCountriesTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE users (
+                id UUID PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL,
+                role VARCHAR(50) NOT NULL,
+                created_at TIMESTAMP DEFAULT now()
+              );
+  - changeSet:
+      id: createRefreshTokensTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE refresh_tokens (
+                id SERIAL PRIMARY KEY,
+                token_hash VARCHAR(255) NOT NULL UNIQUE,  
+                user_id UUID NOT NULL,
+                issued_at TIMESTAMP DEFAULT now(),
+                expires_at TIMESTAMP NOT NULL,
+                expires_absolute TIMESTAMP NOT NULL,
+                revoked BOOLEAN DEFAULT FALSE,
+              
+                CONSTRAINT fk_user_refresh_tokens
+                      FOREIGN KEY (user_id) REFERENCES users(id)
+              );
+              
+              CREATE INDEX idx_user_refresh_tokens ON refresh_tokens(user_id);
+  - changeSet:
+      id: insertAdmin
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO users (id, username, password, role) VALUES
+              (gen_random_uuid(), 'admin', '$2a$10$Sk8BsDvm5n8ZvhVud/CaWORlI5wB8RGRIN6nNCklP2ENyRM95yypi', 'ADMIN');

@@ -1,6 +1,7 @@
 package com.github.lowkkid.thewildoasisbackend.exception;
 
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<String> handleInvalidInputException(final IllegalArgumentException e) {
-        log.warn(e.getMessage());
+        logException("Invalid input error", e);
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<String> handle(MethodArgumentNotValidException ex) {
-        log.error("Method arguments are not valid", ex);
+        logException("Method arguments are not valid", ex);
         List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -51,8 +52,31 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleNotFoundException(Exception ex) {
-        log.error(ex.getMessage(), ex);
+        logException(ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(INTERNAL_SERVER_ERROR);
+    }
+
+    private void logException(String logMessage, Exception ex) {
+        StackTraceElement[] stackTrace = ex.getStackTrace();
+        String location = "unknown";
+
+        if (stackTrace.length > 0) {
+            StackTraceElement firstElement = stackTrace[0];
+            location = String.format("%s.%s:%d",
+                    firstElement.getClassName(),
+                    firstElement.getMethodName(),
+                    firstElement.getLineNumber());
+        }
+
+        if (logMessage != null) {
+            log.warn("{}: {} at {}", logMessage, ex.getMessage(), location);
+        } else {
+            log.warn("{} at {}", ex.getMessage(), location);
+        }
+    }
+
+    private void logException(Exception ex) {
+        logException(null, ex);
     }
 }
 

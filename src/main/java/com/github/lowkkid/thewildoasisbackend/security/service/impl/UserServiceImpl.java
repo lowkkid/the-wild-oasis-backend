@@ -12,8 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +51,17 @@ public class UserServiceImpl implements UserService {
         user.setRole(UserRole.EMPLOYEE);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public void deleteEmployee(UUID id) {
+        var user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User with id " + id + " not found"));
+
+        if (user.getRole() != UserRole.EMPLOYEE) {
+            throw new AccessDeniedException("You can't delete non-employee user");
+        }
+
+        userRepository.delete(user);
     }
 }

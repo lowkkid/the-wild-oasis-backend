@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
@@ -29,7 +31,15 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "Get employees")
+    @Operation(summary = "Delete employee (admin only)")
+    @PreAuthorize("hasAuthority('admin')")
+    @DeleteMapping("/employee/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable UUID id) {
+        adminService.deleteEmployee(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get all users (admin only)")
     @PreAuthorize("hasAuthority('admin')")
     @GetMapping("/users")
     public ResponseEntity<Page<UserDTO>> getUsers(@RequestParam(required = false) UserRole role,

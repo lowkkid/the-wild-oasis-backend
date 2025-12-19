@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +27,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void createEmployee(UsernameAndPassword usernameAndPassword) {
         userService.createEmployee(usernameAndPassword);
+    }
+
+    @Override
+    public void deleteEmployee(UUID id) {
+        userService.deleteEmployee(id);
     }
 }

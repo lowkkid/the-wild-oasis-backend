@@ -85,7 +85,10 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         SECURE_RANDOM.nextBytes(tokenBytes);
         String token = Base64.getEncoder().encodeToString(tokenBytes);
 
-        newRefreshToken.setTokenHash(token);
+        String salt = BCrypt.gensalt(BCRYPT_COST_FACTOR, SECURE_RANDOM);
+        String tokenHash = BCrypt.hashpw(token, salt);
+        newRefreshToken.setTokenHash(tokenHash);
+
         refreshTokenRepository.delete(tokenFromDb);
         refreshTokenRepository.save(newRefreshToken);
         return token;

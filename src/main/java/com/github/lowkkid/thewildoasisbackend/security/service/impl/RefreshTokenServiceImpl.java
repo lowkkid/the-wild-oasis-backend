@@ -60,7 +60,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         ResponseCookie refreshTokenCookie = ResponseCookie.from("refreshToken", userToken)
                 .httpOnly(true)
                 .secure(true)
-                .sameSite("Strict")
+                .sameSite("None")
                 .maxAge(tokenExpirationTimeUtils.getRefreshTokenExpirationTimeSec(issuedAt))
                 .build();
         response.addHeader(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
@@ -106,7 +106,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         ResponseCookie refreshTokenCookie = ResponseCookie.from("refreshToken", newUserToken)
                 .httpOnly(true)
                 .secure(true)
-                .sameSite("Strict")
+                .sameSite("None")
                 .maxAge(tokenExpirationTimeUtils.getRefreshTokenExpirationTimeSec(issuedAt))
                 .build();
         response.addHeader(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());

@@ -70,6 +70,9 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken refresh(String userToken, HttpServletResponse response) {
+        if (userToken.isEmpty()) {
+            throw new TokenException("Empty refresh token");
+        }
         var userTokenParts = userToken.split("\\.");
         var userRefreshTokenId = userTokenParts[0];
         var userRefreshToken = userTokenParts[1];

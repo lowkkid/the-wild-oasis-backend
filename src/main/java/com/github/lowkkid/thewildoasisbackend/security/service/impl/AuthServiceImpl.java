@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
     public JwtTokenResponse refresh(String refreshToken, HttpServletResponse response) {
         var newRefreshToken = refreshTokenService.refresh(refreshToken, response);
         var user = newRefreshToken.getUser();
-        var newJwtToken = jwtService.generate(user.getId(), user.getRole(), user.getUsername());
+        var newJwtToken = jwtService.generate(user.getId(), user.getRole(), user.getUsername(), user.getAvatar());
 
         return new JwtTokenResponse(newJwtToken);
     }

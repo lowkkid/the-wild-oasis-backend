@@ -28,8 +28,9 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generate(UUID userId, UserRole role, String username) {
+    public String generate(UUID userId, UserRole role, String username, String avatar) {
         Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("avatar",  avatar);
         extraClaims.put("role", role);
         extraClaims.put("username", username);
         var issuedAt = new Date();
@@ -44,7 +45,8 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generate(UserDetailsImpl userDetails) {
-        return generate(userDetails.getUserId(), userDetails.getRole(), userDetails.getUsername());
+        return generate(
+                userDetails.getUserId(), userDetails.getRole(), userDetails.getUsername(), userDetails.getAvatar());
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface JwtService {
 
-    String generate(UUID userId, UserRole role, String username);
+    String generate(UUID userId, UserRole role, String username, String avatar);
 
     String generate(UserDetailsImpl userDetails);
 

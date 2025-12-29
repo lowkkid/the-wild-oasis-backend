@@ -77,6 +77,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         var userRefreshTokenId = userTokenParts[0];
         var userRefreshToken = userTokenParts[1];
 
+        //TODO: check, if user is fetched with another query
         var tokenFromDb = refreshTokenRepository.findById(UUID.fromString(userRefreshTokenId))
                 .orElseThrow(() -> new TokenException("Refresh token with id " + userRefreshTokenId + " not found"));
 

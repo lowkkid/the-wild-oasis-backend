@@ -52,8 +52,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 var userId = claims.getSubject();
                 var username = claims.get("username", String.class);
                 var role =  UserRole.valueOf(claims.get("role", String.class));
+                var avatar =  claims.get("avatar", String.class);
 
-                var userDetails = new UserDetailsImpl(username, role, UUID.fromString(userId));
+                var userDetails = new UserDetailsImpl(username, role, UUID.fromString(userId), avatar);
                 var authentication =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,

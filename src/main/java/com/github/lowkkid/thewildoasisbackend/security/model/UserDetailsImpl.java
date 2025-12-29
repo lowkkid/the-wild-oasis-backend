@@ -20,12 +20,14 @@ public class UserDetailsImpl implements UserDetails {
     private final String password;
     private final UserRole role;
     private final UUID userId;
+    private final String avatar;
 
-    public UserDetailsImpl(String username, UserRole role, UUID userId) {
+    public UserDetailsImpl(String username, UserRole role, UUID userId, String avatar) {
         this.role = role;
         this.password = "";
         this.userId = userId;
         this.username = username;
+        this.avatar = avatar;
     }
 
     @Override

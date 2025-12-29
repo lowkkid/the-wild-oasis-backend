@@ -30,6 +30,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;

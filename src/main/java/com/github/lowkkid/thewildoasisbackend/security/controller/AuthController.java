@@ -1,7 +1,7 @@
 package com.github.lowkkid.thewildoasisbackend.security.controller;
 
 import com.github.lowkkid.thewildoasisbackend.security.model.JwtTokenResponse;
-import com.github.lowkkid.thewildoasisbackend.security.model.UsernameAndPassword;
+import com.github.lowkkid.thewildoasisbackend.user.model.UsernameAndPassword;
 import com.github.lowkkid.thewildoasisbackend.security.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletResponse;

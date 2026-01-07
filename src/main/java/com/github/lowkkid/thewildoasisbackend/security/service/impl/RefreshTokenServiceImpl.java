@@ -1,11 +1,11 @@
 package com.github.lowkkid.thewildoasisbackend.security.service.impl;
 
-import com.github.lowkkid.thewildoasisbackend.domain.entity.RefreshToken;
-import com.github.lowkkid.thewildoasisbackend.security.repository.RefreshTokenRepository;
-import com.github.lowkkid.thewildoasisbackend.security.repository.UserRepository;
-import com.github.lowkkid.thewildoasisbackend.exception.TokenException;
+import com.github.lowkkid.thewildoasisbackend.security.domain.entity.RefreshToken;
+import com.github.lowkkid.thewildoasisbackend.security.domain.repository.RefreshTokenRepository;
+import com.github.lowkkid.thewildoasisbackend.user.domain.repository.UserRepository;
+import com.github.lowkkid.thewildoasisbackend.security.exception.TokenException;
 import com.github.lowkkid.thewildoasisbackend.security.service.RefreshTokenService;
-import com.github.lowkkid.thewildoasisbackend.security.TokenExpirationTimeUtils;
+import com.github.lowkkid.thewildoasisbackend.security.utils.TokenExpirationTimeUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 

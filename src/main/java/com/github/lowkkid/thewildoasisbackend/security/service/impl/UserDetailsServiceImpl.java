@@ -1,6 +1,6 @@
 package com.github.lowkkid.thewildoasisbackend.security.service.impl;
 
-import com.github.lowkkid.thewildoasisbackend.security.repository.UserRepository;
+import com.github.lowkkid.thewildoasisbackend.user.domain.repository.UserRepository;
 import com.github.lowkkid.thewildoasisbackend.security.model.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

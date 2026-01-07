@@ -1,7 +1,7 @@
 package com.github.lowkkid.thewildoasisbackend.security.service.impl;
 
 import com.github.lowkkid.thewildoasisbackend.security.model.JwtTokenResponse;
-import com.github.lowkkid.thewildoasisbackend.security.model.UsernameAndPassword;
+import com.github.lowkkid.thewildoasisbackend.user.model.UsernameAndPassword;
 import com.github.lowkkid.thewildoasisbackend.security.model.UserDetailsImpl;
 import com.github.lowkkid.thewildoasisbackend.security.service.AuthService;
 import com.github.lowkkid.thewildoasisbackend.security.service.JwtService;

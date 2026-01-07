@@ -1,6 +1,6 @@
 package com.github.lowkkid.thewildoasisbackend.security.model;
 
-import com.github.lowkkid.thewildoasisbackend.security.model.enums.UserRole;
+import com.github.lowkkid.thewildoasisbackend.user.model.UserRole;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

@@ -1,10 +1,10 @@
 package com.github.lowkkid.thewildoasisbackend.security.service.impl;
 
-import com.github.lowkkid.thewildoasisbackend.security.model.enums.JwtValidationResult;
-import com.github.lowkkid.thewildoasisbackend.security.model.enums.UserRole;
+import com.github.lowkkid.thewildoasisbackend.security.model.JwtValidationResult;
+import com.github.lowkkid.thewildoasisbackend.user.model.UserRole;
 import com.github.lowkkid.thewildoasisbackend.security.model.UserDetailsImpl;
 import com.github.lowkkid.thewildoasisbackend.security.service.JwtService;
-import com.github.lowkkid.thewildoasisbackend.security.TokenExpirationTimeUtils;
+import com.github.lowkkid.thewildoasisbackend.security.utils.TokenExpirationTimeUtils;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;

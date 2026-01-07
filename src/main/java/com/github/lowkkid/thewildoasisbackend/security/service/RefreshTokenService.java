@@ -1,6 +1,6 @@
 package com.github.lowkkid.thewildoasisbackend.security.service;
 
-import com.github.lowkkid.thewildoasisbackend.domain.entity.RefreshToken;
+import com.github.lowkkid.thewildoasisbackend.security.domain.entity.RefreshToken;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.UUID;

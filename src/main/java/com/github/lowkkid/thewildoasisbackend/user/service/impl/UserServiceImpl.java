@@ -65,7 +65,8 @@ public class UserServiceImpl implements UserService {
         user.setUsername(updateUserRequest.username());
 
         if (updateUserRequest.avatar() != null) {
-            minioService.deleteFile(user.getAvatar());
+            minioService.deleteFile(USER_AVATARS_PREFIX + user.getUsername());
+
             var newAvatar = minioService.uploadFile(updateUserRequest.avatar(),
                     USER_AVATARS_PREFIX + updateUserRequest.username());
             user.setAvatar(newAvatar);
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
         var user = getById(id);
 
         if (!BCrypt.checkpw(updatePasswordRequest.oldPassword(), user.getPassword())) {
-            throw new BadCredentialsException("Invalid refresh token");
+            throw new BadCredentialsException("Old password is incorrect");
         }
 
         var newEncodedPassword = passwordEncoder.encode(updatePasswordRequest.newPassword());

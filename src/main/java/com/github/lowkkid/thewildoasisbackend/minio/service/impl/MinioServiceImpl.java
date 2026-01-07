@@ -29,12 +29,14 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public String uploadFile(MultipartFile file, String objectName) {
+        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+
         try {
             var args = PutObjectArgs.builder()
                     .stream(file.getInputStream(), file.getSize(), -1)
                     .bucket(applicationBucket)
-                    .object(objectName)
-                    .contentType(resolveContentType(file.getOriginalFilename()))
+                    .object(objectName + "." + extension)
+                    .contentType(resolveContentType(extension))
                     .build();
             minioClient.putObject(args);
             return generateDownloadUrl(objectName);
@@ -83,8 +85,7 @@ public class MinioServiceImpl implements MinioService {
     }
 
 
-    private String resolveContentType(String filename) {
-        String extension = StringUtils.getFilenameExtension(filename);
+    private String resolveContentType(String extension) {
         if (extension == null) {
             return "application/octet-stream";
         }

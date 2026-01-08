@@ -5,6 +5,6 @@ import com.github.lowkkid.thewildoasisbackend.user.model.UpdateUserRequest;
 
 public interface AccountService {
 
-    void update(UpdateUserRequest request);
+    String update(UpdateUserRequest request);
     void updatePassword(UpdatePasswordRequest request);
 }

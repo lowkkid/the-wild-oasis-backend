@@ -1,5 +1,6 @@
 package com.github.lowkkid.thewildoasisbackend.user.service;
 
+import com.github.lowkkid.thewildoasisbackend.user.domain.entity.User;
 import com.github.lowkkid.thewildoasisbackend.user.model.UserDTO;
 import com.github.lowkkid.thewildoasisbackend.user.model.UsernameAndPassword;
 import com.github.lowkkid.thewildoasisbackend.user.model.UserRole;
@@ -17,7 +18,7 @@ public interface UserService {
     Page<UserDTO> findAllDtoByRole(
             UserRole role, Integer pageNumber, Integer pageSize, String sortField, Sort.Direction sortDirection);
 
-    void update(UUID id, UpdateUserRequest updateUserRequest);
+    User update(UUID id, UpdateUserRequest updateUserRequest);
 
     void updatePassword(UUID id, UpdatePasswordRequest updatePasswordRequest);
 

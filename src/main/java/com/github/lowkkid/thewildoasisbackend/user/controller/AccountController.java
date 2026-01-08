@@ -16,9 +16,9 @@ public class AccountController {
     private final AccountService accountService;
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> update(@ModelAttribute UpdateUserRequest request) {
-        accountService.update(request);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> update(@ModelAttribute UpdateUserRequest request) {
+        var newJwt = accountService.update(request);
+        return ResponseEntity.ok(newJwt);
     }
 
     @PatchMapping("/password")

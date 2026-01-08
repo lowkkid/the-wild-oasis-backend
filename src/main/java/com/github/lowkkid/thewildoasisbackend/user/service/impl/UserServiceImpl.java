@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(UUID id, UpdateUserRequest updateUserRequest) {
+    public User update(UUID id, UpdateUserRequest updateUserRequest) {
         var user = getById(id);
         user.setUsername(updateUserRequest.username());
 
@@ -71,6 +71,8 @@ public class UserServiceImpl implements UserService {
                     USER_AVATARS_PREFIX + updateUserRequest.username());
             user.setAvatar(newAvatar);
         }
+
+        return userRepository.save(user);
     }
 
     @Override

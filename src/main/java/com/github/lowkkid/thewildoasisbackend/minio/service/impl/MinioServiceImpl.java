@@ -29,17 +29,18 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public String uploadFile(MultipartFile file, String objectName) {
-        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+        var extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+        var objectNameWithExtension = objectName + "." + extension;
 
         try {
             var args = PutObjectArgs.builder()
                     .stream(file.getInputStream(), file.getSize(), -1)
                     .bucket(applicationBucket)
-                    .object(objectName + "." + extension)
+                    .object(objectNameWithExtension)
                     .contentType(resolveContentType(extension))
                     .build();
             minioClient.putObject(args);
-            return generateDownloadUrl(objectName);
+            return generateDownloadUrl(objectNameWithExtension);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }

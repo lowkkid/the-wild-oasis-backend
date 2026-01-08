@@ -22,8 +22,11 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+
+import static com.github.lowkkid.thewildoasisbackend.common.utils.UrlUtils.extractFileName;
 
 @Service
 @RequiredArgsConstructor
@@ -64,11 +67,19 @@ public class UserServiceImpl implements UserService {
         var user = getById(id);
         user.setUsername(updateUserRequest.username());
 
-        if (updateUserRequest.avatar() != null) {
-            minioService.deleteFile(USER_AVATARS_PREFIX + user.getUsername());
+        var avatar = updateUserRequest.avatar();
+        if (avatar != null) {
+            if (user.getAvatar() != null) {
+                minioService.deleteFile(USER_AVATARS_PREFIX + extractFileName(user.getAvatar()));
+            }
 
-            var newAvatar = minioService.uploadFile(updateUserRequest.avatar(),
-                    USER_AVATARS_PREFIX + updateUserRequest.username());
+            minioService.deleteFile(
+                    USER_AVATARS_PREFIX +
+                            user.getUsername() +
+                            StringUtils.getFilenameExtension(avatar.getOriginalFilename()));
+
+            var newAvatar = minioService.uploadFile(
+                    avatar,USER_AVATARS_PREFIX + updateUserRequest.username());
             user.setAvatar(newAvatar);
         }
 

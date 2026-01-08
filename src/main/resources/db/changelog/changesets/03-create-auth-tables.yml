@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: createCountriesTable
+      id: createUsersTable
       author: Vladislav Shikunov
       changes:
         - sql:
@@ -29,7 +29,7 @@ databaseChangeLog:
                 revoked BOOLEAN DEFAULT FALSE,
               
                 CONSTRAINT fk_user_refresh_tokens
-                      FOREIGN KEY (user_id) REFERENCES users(id)
+                      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
               );
               
               CREATE INDEX idx_user_refresh_tokens ON refresh_tokens(user_id);

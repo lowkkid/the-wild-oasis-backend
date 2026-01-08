@@ -9,9 +9,11 @@ import com.github.lowkkid.thewildoasisbackend.cabin.mapper.CabinMapper;
 import com.github.lowkkid.thewildoasisbackend.cabin.domain.repository.CabinRepository;
 import com.github.lowkkid.thewildoasisbackend.cabin.service.CabinService;
 import com.github.lowkkid.thewildoasisbackend.minio.service.MinioService;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.github.lowkkid.thewildoasisbackend.common.utils.UrlUtils.extractFileName;
 
 @Service
 @AllArgsConstructor
@@ -69,6 +73,9 @@ public class CabinServiceImpl implements CabinService {
         if (cabinEditRequest.getImage() == null) {
             cabin.setImage(existingCabin.getImage());
         } else {
+            if (existingCabin.getImage() != null) {
+                minioService.deleteFile(CABIN_IMAGES_PREFIX + extractFileName(existingCabin.getImage()));
+            }
             minioService.deleteFile(CABIN_IMAGES_PREFIX + cabin.getId());
             String url = minioService.uploadFile(cabinEditRequest.getImage(),
                     CABIN_IMAGES_PREFIX + existingCabin.getId());
@@ -83,8 +90,11 @@ public class CabinServiceImpl implements CabinService {
     public void delete(Long id) {
         Cabin cabin = cabinRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cabin with id " + id + " not found"));
+        if (cabin.getImage() != null) {
+            minioService.deleteFile(CABIN_IMAGES_PREFIX + extractFileName(cabin.getImage()));
+        }
         cabinRepository.delete(cabin);
-        minioService.deleteFile(CABIN_IMAGES_PREFIX + cabin.getId());
+
     }
 
     @Override
@@ -107,7 +117,7 @@ public class CabinServiceImpl implements CabinService {
                 if (newUrl == null) {
                     log.info("Failed to generate download url for cabin {}", cabin.getId());
                     hasErrors.set(true);
-                } else  {
+                } else {
                     cabin.setImage(newUrl);
                 }
 

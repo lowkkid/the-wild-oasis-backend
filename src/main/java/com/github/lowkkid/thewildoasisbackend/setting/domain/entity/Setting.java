@@ -1,11 +1,10 @@
 package com.github.lowkkid.thewildoasisbackend.setting.domain.entity;
 
+import com.github.lowkkid.thewildoasisbackend.common.domain.entity.Tracked;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "settings")
@@ -13,8 +12,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Setting {
+@SuperBuilder
+public class Setting extends Tracked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +30,5 @@ public class Setting {
 
     @Column(name = "breakfast_price", nullable = false)
     private BigDecimal breakfastPrice;
-
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 }
 

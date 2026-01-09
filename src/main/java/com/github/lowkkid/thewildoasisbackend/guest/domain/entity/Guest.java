@@ -1,10 +1,9 @@
 package com.github.lowkkid.thewildoasisbackend.guest.domain.entity;
 
+import com.github.lowkkid.thewildoasisbackend.common.domain.entity.Tracked;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "guests")
@@ -12,8 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Guest {
+@SuperBuilder
+public class Guest extends Tracked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +30,5 @@ public class Guest {
 
     @Column(name = "national_id", nullable = false, unique = true)
     private String nationalId;
-
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 }
 

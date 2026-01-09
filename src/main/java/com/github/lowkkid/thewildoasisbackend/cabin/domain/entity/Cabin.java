@@ -1,10 +1,13 @@
 package com.github.lowkkid.thewildoasisbackend.cabin.domain.entity;
 
+import com.github.lowkkid.thewildoasisbackend.common.domain.entity.Tracked;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -13,8 +16,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Cabin {
+@SuperBuilder
+public class Cabin extends Tracked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

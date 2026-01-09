@@ -1,7 +1,11 @@
 databaseChangeLog:
   - include:
-      file: classpath:db/changelog/changesets/01-create-tables.yml
+      file: db/changelog/changesets/01-create-cabins-table.yml
   - include:
-      file: classpath:db/changelog/changesets/02-populate-tables.yml
+      file: db/changelog/changesets/02-create-guest-tables.yml
   - include:
-      file: classpath:db/changelog/changesets/03-create-auth-tables.yml
+      file: db/changelog/changesets/03-create-settings-table.yml
+  - include:
+      file: db/changelog/changesets/04-create-bookings-table.yml
+  - include:
+      file: db/changelog/changesets/05-create-auth-tables.yml

@@ -1,15 +1,19 @@
 package com.github.lowkkid.thewildoasisbackend.booking.service;
 
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingDTO;
-import com.github.lowkkid.thewildoasisbackend.booking.model.CheckinRequest;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingStatus;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingSummary;
+import com.github.lowkkid.thewildoasisbackend.booking.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public interface BookingService {
     Page<BookingSummary> getAll(
             BookingStatus status, Integer pageNumber, Integer pageSize, String sortField, Sort.Direction sortDirection);
+
+    List<DailyBookingSales> getSalesBetweenDates(LocalDateTime start, LocalDateTime end);
+
+    List<StaySummary> getStaySummariesBetweenDates(LocalDateTime start, LocalDateTime end);
 
     BookingDTO getById(Long id);
 

@@ -1,9 +1,6 @@
 package com.github.lowkkid.thewildoasisbackend.booking.controller;
 
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingDTO;
-import com.github.lowkkid.thewildoasisbackend.booking.model.CheckinRequest;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingSummary;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingStatus;
+import com.github.lowkkid.thewildoasisbackend.booking.model.*;
 import com.github.lowkkid.thewildoasisbackend.booking.service.BookingService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -12,6 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bookings")
@@ -28,6 +28,21 @@ public class BookingController {
                                                        @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection) {
         var bookings = bookingService.getAll(status, pageNumber, pageSize, sortField, sortDirection);
         return ResponseEntity.ok(bookings);
+    }
+
+    @GetMapping("/sales")
+    public ResponseEntity<List<DailyBookingSales>> getSalesBetweenDates(
+            @RequestParam LocalDateTime start,  @RequestParam LocalDateTime end) {
+        var sales = bookingService.getSalesBetweenDates(start, end);
+        return ResponseEntity.ok(sales);
+    }
+
+    @GetMapping("/stays")
+    public ResponseEntity<List<StaySummary>> getStaySummariesBetweenDates(
+            @RequestParam LocalDateTime start,  @RequestParam LocalDateTime end
+    ) {
+        var stays = bookingService.getStaySummariesBetweenDates(start, end);
+        return ResponseEntity.ok(stays);
     }
 
     @GetMapping("/{id}")

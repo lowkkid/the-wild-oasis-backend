@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCabinsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE cabins (
+                id SERIAL PRIMARY KEY ,
+                name VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT now(),
+                max_capacity SMALLINT NOT NULL,
+                regular_price NUMERIC(7, 2) NOT NULL,
+                discount SMALLINT DEFAULT 0,
+                description TEXT NOT NULL,
+                image TEXT
+              );

@@ -1,16 +1,13 @@
 package com.github.lowkkid.thewildoasisbackend.booking.service.impl;
 
+import com.github.lowkkid.thewildoasisbackend.booking.model.*;
 import com.github.lowkkid.thewildoasisbackend.common.exception.AlreadyExistsException;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingDTO;
 import com.github.lowkkid.thewildoasisbackend.booking.domain.entity.Booking;
 import com.github.lowkkid.thewildoasisbackend.common.exception.NotFoundException;
 import com.github.lowkkid.thewildoasisbackend.booking.mapper.BookingMapper;
-import com.github.lowkkid.thewildoasisbackend.booking.model.CheckinRequest;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingStatus;
 import com.github.lowkkid.thewildoasisbackend.booking.domain.repository.BookingRepository;
 import com.github.lowkkid.thewildoasisbackend.cabin.domain.repository.CabinRepository;
 import com.github.lowkkid.thewildoasisbackend.guest.domain.repository.GuestRepository;
-import com.github.lowkkid.thewildoasisbackend.booking.model.BookingSummary;
 import com.github.lowkkid.thewildoasisbackend.booking.service.BookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -33,6 +33,16 @@ public class BookingServiceImpl implements BookingService {
 
         return bookingRepository.findAllWithCabinsAndGuests(
                 status, PageRequest.of(--pageNumber, pageSize, Sort.by(sortDirection, sortField)));
+    }
+
+    @Override
+    public List<DailyBookingSales> getSalesBetweenDates(LocalDateTime start, LocalDateTime end) {
+        return bookingRepository.findDailySalesBetweenDates(start, end);
+    }
+
+    @Override
+    public List<StaySummary> getStaySummariesBetweenDates(LocalDateTime start, LocalDateTime end) {
+        return bookingRepository.findAllStaysByStartDateBetween(start, end);
     }
 
     @Override

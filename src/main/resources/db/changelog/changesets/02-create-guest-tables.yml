@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCountriesTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE countries (
+                id SERIAL PRIMARY KEY ,
+                name VARCHAR(255) NOT NULL UNIQUE,
+                flag TEXT
+              );
+  - changeSet:
+      id: createGuestsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE guests (
+                id SERIAL PRIMARY KEY ,
+                full_name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL UNIQUE,
+                country_id INTEGER,
+                national_id VARCHAR(50) NOT NULL UNIQUE,
+                created_at TIMESTAMP DEFAULT now(),
+              
+                CONSTRAINT fk_guests_country
+                FOREIGN KEY (country_id) REFERENCES countries(id)
+              );

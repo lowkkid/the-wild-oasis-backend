@@ -1,20 +1,20 @@
 package com.github.lowkkid.thewildoasisbackend.user.domain.entity;
 
+import com.github.lowkkid.thewildoasisbackend.common.domain.entity.Tracked;
 import com.github.lowkkid.thewildoasisbackend.user.model.UserRole;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Builder
+@SuperBuilder
 @Table(name = "users")
-public class User {
+public class User extends Tracked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,8 +32,4 @@ public class User {
 
     @Column(name = "avatar")
     private String avatar;
-
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 }

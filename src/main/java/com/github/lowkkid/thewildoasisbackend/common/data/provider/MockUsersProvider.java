@@ -1,0 +1,26 @@
+package com.github.lowkkid.thewildoasisbackend.common.data.provider;
+
+import com.github.lowkkid.thewildoasisbackend.user.domain.entity.User;
+import com.github.lowkkid.thewildoasisbackend.user.model.UserRole;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class MockUsersProvider {
+
+    public static User ADMIN = User.builder()
+            .username("admin")
+            .password("admin_password")
+            .role(UserRole.ADMIN)
+            .createdAt(LocalDateTime.now().minusDays(2))
+            .build();
+
+    public static User EMPLOYEE = User.builder()
+            .username("employee")
+            .password("employee_password")
+            .role(UserRole.EMPLOYEE)
+            .createdAt(LocalDateTime.now().minusDays(1))
+            .build();
+}

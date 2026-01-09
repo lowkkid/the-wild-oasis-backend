@@ -2,13 +2,13 @@ package com.github.lowkkid.thewildoasisbackend.booking.domain.entity;
 
 import com.github.lowkkid.thewildoasisbackend.booking.model.BookingStatus;
 import com.github.lowkkid.thewildoasisbackend.cabin.domain.entity.Cabin;
+import com.github.lowkkid.thewildoasisbackend.common.domain.entity.Tracked;
 import com.github.lowkkid.thewildoasisbackend.guest.domain.entity.Guest;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "bookings")
@@ -16,8 +16,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Booking {
+@SuperBuilder
+public class Booking extends Tracked {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +55,10 @@ public class Booking {
     @Column(name = "is_paid", nullable = false)
     private Boolean isPaid;
 
-    @Column
+    @Column(name = "paid_at")
+    private LocalDateTime paidAt;
+
+    @Column(name = "observations")
     private String observations;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,8 +68,4 @@ public class Booking {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
-
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 }

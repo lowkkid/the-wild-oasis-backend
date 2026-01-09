@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: createSettingsTable
+      author: Vladislav Shikunov
+      changes:
+        - sql:
+            sql: |
+              CREATE TABLE settings (
+                id SERIAL PRIMARY KEY ,
+                min_booking_length SMALLINT NOT NULL,
+                max_booking_length SMALLINT NOT NULL,
+                max_guests_per_booking SMALLINT NOT NULL,
+                breakfast_price NUMERIC(7, 2) NOT NULL,
+                created_at TIMESTAMP DEFAULT now()
+              );

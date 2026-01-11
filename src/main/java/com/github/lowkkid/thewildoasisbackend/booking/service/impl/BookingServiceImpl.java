@@ -67,6 +67,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<DailyActivity> getTodayActivity() {
+        return bookingRepository.getActivityForTheDay(LocalDate.now());
+    }
+
+    @Override
     public BookingDTO getById(Long id) {
         var booking = getEntityById(id);
         return bookingMapper.toDto(booking);

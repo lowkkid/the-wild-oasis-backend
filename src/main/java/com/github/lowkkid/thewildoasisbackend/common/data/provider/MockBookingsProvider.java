@@ -143,14 +143,14 @@ public final class MockBookingsProvider {
             .build();
 
     public static final Booking BOOKING_9 = Booking.builder()
-            .startDate(NOW.minusDays(6))
-            .endDate(NOW.minusDays(3))
+            .startDate(NOW.plusDays(3))
+            .endDate(NOW.plusDays(6))
             .numNights((short) 3)
             .numGuests((short) 4)
             .cabinPrice(new BigDecimal("300.00"))
             .extrasPrice(new BigDecimal("60.00"))
             .totalPrice(new BigDecimal("960.00"))
-            .status(BookingStatus.CHECKED_OUT)
+            .status(BookingStatus.UNCONFIRMED)
             .hasBreakfast(true)
             .isPaid(true)
             .observations(null)
@@ -160,12 +160,12 @@ public final class MockBookingsProvider {
 
     public static final Booking BOOKING_10 = Booking.builder()
             .startDate(NOW.plusDays(10))
-            .endDate(NOW.plusDays(22))
-            .numNights((short) 12)
+            .endDate(NOW.plusDays(19))
+            .numNights((short) 9)
             .numGuests((short) 4)
             .cabinPrice(new BigDecimal("450.00"))
             .extrasPrice(new BigDecimal("60.00"))
-            .totalPrice(new BigDecimal("5460.00"))
+            .totalPrice(new BigDecimal("4110.00"))
             .status(BookingStatus.UNCONFIRMED)
             .hasBreakfast(true)
             .isPaid(true)
@@ -398,6 +398,104 @@ public final class MockBookingsProvider {
             .createdAt(NOW.minusDays(6))
             .build();
 
+    public static final Booking BOOKING_25 = Booking.builder()
+            .startDate(NOW.minusDays(2).plusHours(2))
+            .endDate(NOW.plusHours(1))
+            .numNights((short) 2)
+            .numGuests((short) 4)
+            .cabinPrice(new BigDecimal("700.00"))
+            .extrasPrice(BigDecimal.ZERO)
+            .totalPrice(new BigDecimal("700.00"))
+            .status(BookingStatus.CHECKED_IN)
+            .hasBreakfast(false)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(2).plusHours(2).minusMinutes(5))
+            .createdAt(NOW.minusDays(6))
+            .build();
+
+    public static final Booking BOOKING_26 = Booking.builder()
+            .startDate(NOW.plusHours(3))
+            .endDate(NOW.plusDays(4))
+            .numNights((short) 3)
+            .numGuests((short) 7)
+            .cabinPrice(new BigDecimal("1400.00"))
+            .extrasPrice(BigDecimal.ZERO)
+            .totalPrice(new BigDecimal("1400.00"))
+            .status(BookingStatus.UNCONFIRMED)
+            .hasBreakfast(false)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(3).plusHours(2).minusMinutes(5))
+            .createdAt(NOW.minusDays(3).plusHours(2).minusMinutes(5))
+            .build();
+
+    public static final Booking BOOKING_27 = Booking.builder()
+            .startDate(NOW.minusDays(2).plusHours(3))
+            .endDate(NOW.plusDays(4))
+            .numNights((short) 6)
+            .numGuests((short) 2)
+            .cabinPrice(new BigDecimal("300.00"))
+            .extrasPrice(new BigDecimal("60.00"))
+            .totalPrice(new BigDecimal("1860.00"))
+            .status(BookingStatus.CHECKED_IN)
+            .hasBreakfast(true)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(2).plusHours(3))
+            .createdAt(NOW.minusDays(40))
+            .build();
+
+    public static final Booking BOOKING_28 = Booking.builder()
+            .startDate(NOW.plusHours(1))
+            .endDate(NOW.plusDays(5))
+            .numNights((short) 5)
+            .numGuests((short) 4)
+            .cabinPrice(new BigDecimal("450.00"))
+            .extrasPrice(new BigDecimal("60.00"))
+            .totalPrice(new BigDecimal("2310.00"))
+            .status(BookingStatus.UNCONFIRMED)
+            .hasBreakfast(true)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(1))
+            .createdAt(NOW.minusDays(1))
+            .build();
+
+
+    public static final Booking BOOKING_29 = Booking.builder()
+            .startDate(NOW.minusDays(55))
+            .endDate(NOW.minusDays(49))
+            .numNights((short) 6)
+            .numGuests((short) 4)
+            .cabinPrice(new BigDecimal("250.00"))
+            .extrasPrice(new BigDecimal("60.00"))
+            .totalPrice(new BigDecimal("1560.00"))
+            .status(BookingStatus.CHECKED_OUT)
+            .hasBreakfast(true)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(55))
+            .createdAt(NOW.minusDays(66))
+            .build();
+
+
+    public static final Booking BOOKING_30 = Booking.builder()
+            .startDate(NOW.minusDays(78))
+            .endDate(NOW.plusDays(75))
+            .numNights((short) 3)
+            .numGuests((short) 5)
+            .cabinPrice(new BigDecimal("200.00"))
+            .extrasPrice(new BigDecimal("100.00"))
+            .totalPrice(new BigDecimal("700.00"))
+            .status(BookingStatus.CHECKED_OUT)
+            .hasBreakfast(true)
+            .isPaid(true)
+            .observations(null)
+            .paidAt(NOW.minusDays(87).minusHours(2))
+            .createdAt(NOW.minusDays(87).minusHours(2))
+            .build();
+
     public static final List<Booking> ALL_BOOKINGS = Arrays.asList(
             BOOKING_1,
             BOOKING_2,
@@ -422,6 +520,12 @@ public final class MockBookingsProvider {
             BOOKING_21,
             BOOKING_22,
             BOOKING_23,
-            BOOKING_24
+            BOOKING_24,
+            BOOKING_25,
+            BOOKING_26,
+            BOOKING_27,
+            BOOKING_28,
+            BOOKING_29,
+            BOOKING_30
     );
 }

@@ -101,9 +101,15 @@ public class BookingController {
         return ResponseEntity.ok(stays);
     }
 
+    @GetMapping("/today")
+    public ResponseEntity<List<DailyActivity>> getActivityForToday() {
+        var activity = bookingService.getTodayActivity();
+        return ResponseEntity.ok(activity);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BookingDTO> getById(@PathVariable Long id) {
-        BookingDTO booking = bookingService.getById(id);
+        var booking = bookingService.getById(id);
         return ResponseEntity.ok(booking);
     }
 
@@ -121,13 +127,13 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<BookingDTO> create(@RequestBody BookingDTO bookingDTO) {
-        BookingDTO createdBooking = bookingService.create(bookingDTO);
+        var createdBooking = bookingService.create(bookingDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBooking);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BookingDTO> update(@PathVariable Long id, @RequestBody BookingDTO bookingDTO) {
-        BookingDTO updatedBooking = bookingService.update(id, bookingDTO);
+        var updatedBooking = bookingService.update(id, bookingDTO);
         return ResponseEntity.ok(updatedBooking);
     }
 

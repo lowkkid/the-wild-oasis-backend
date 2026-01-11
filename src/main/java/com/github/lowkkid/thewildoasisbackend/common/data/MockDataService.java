@@ -169,6 +169,12 @@ public class MockDataService {
         mapping.put(22, 8);
         mapping.put(23, 8);
         mapping.put(24, 8);
+        mapping.put(25, 2);
+        mapping.put(26, 2);
+        mapping.put(27, 3);
+        mapping.put(28, 4);
+        mapping.put(29, 1);
+        mapping.put(30, 1);
 
         return mapping;
     }
@@ -200,6 +206,12 @@ public class MockDataService {
         mapping.put(22, 1);
         mapping.put(23, 23);
         mapping.put(24, 24);
+        mapping.put(25, 25);
+        mapping.put(26, 26);
+        mapping.put(27, 27);
+        mapping.put(28, 28);
+        mapping.put(29, 29);
+        mapping.put(30, 30);
 
         return mapping;
     }

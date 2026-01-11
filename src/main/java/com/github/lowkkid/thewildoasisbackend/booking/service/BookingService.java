@@ -17,6 +17,8 @@ public interface BookingService {
 
     List<StaySummary> getStaySummariesBetweenDates(LocalDate start, LocalDate end);
 
+    List<DailyActivity> getTodayActivity();
+
     BookingDTO getById(Long id);
 
     void checkin(Long id, CheckinRequest checkinRequest);

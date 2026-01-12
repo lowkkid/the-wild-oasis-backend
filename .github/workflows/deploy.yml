@@ -11,7 +11,7 @@ env:
   SERVER_USER: ${{ secrets.SERVER_USER }}
   SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
   SERVER_DEPLOY_PATH: ${{ secrets.SERVER_DEPLOY_PATH }}
-  DOCKER_IMAGE_NAME: the-wild-oasis-backend
+  DOCKER_IMAGE_NAME: lodge-core-backend
 
 jobs:
   build-and-deploy:

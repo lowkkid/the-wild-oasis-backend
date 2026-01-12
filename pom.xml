@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.lowkkid</groupId>
-    <artifactId>the-wild-oasis-backend</artifactId>
+    <artifactId>lodge-core-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>the-wild-oasis-backend</name>
-    <description>the-wild-oasis-backend</description>
+    <name>lodge-core-backend</name>
+    <description>lodge-core-backend</description>
     <properties>
         <java.version>17</java.version>
         <minio.version>8.5.17</minio.version>
@@ -91,7 +91,7 @@
     </dependencies>
 
     <build>
-        <finalName>the-wild-oasis-backend</finalName>
+        <finalName>lodge-core-backend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

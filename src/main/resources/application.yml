@@ -1,6 +1,6 @@
 spring:
   application:
-    name: the-wild-oasis-backend
+    name: lodge-core-backend
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -23,7 +23,7 @@ spring:
 server:
   port: ${SERVER_PORT}
   servlet:
-    context-path: /api/v1/the-wild-oasis
+    context-path: /api/v1/lodge-core
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS}
 

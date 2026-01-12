@@ -7,6 +7,6 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine AS final
 WORKDIR /app
-COPY --from=builder /usr/src/app/target/the-wild-oasis-backend.jar app.jar
+COPY --from=builder /usr/src/app/target/lodge-core.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]

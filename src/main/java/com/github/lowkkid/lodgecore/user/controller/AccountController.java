@@ -1,0 +1,29 @@
+package com.github.lowkkid.lodgecore.user.controller;
+
+import com.github.lowkkid.lodgecore.user.model.UpdatePasswordRequest;
+import com.github.lowkkid.lodgecore.user.model.UpdateUserRequest;
+import com.github.lowkkid.lodgecore.user.service.AccountService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/account")
+@AllArgsConstructor
+public class AccountController {
+
+    private final AccountService accountService;
+
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> update(@ModelAttribute UpdateUserRequest request) {
+        var newJwt = accountService.update(request);
+        return ResponseEntity.ok(newJwt);
+    }
+
+    @PatchMapping("/password")
+    public ResponseEntity<Void> updatePassword(@RequestBody UpdatePasswordRequest request) {
+        accountService.updatePassword(request);
+        return ResponseEntity.noContent().build();
+    }
+}

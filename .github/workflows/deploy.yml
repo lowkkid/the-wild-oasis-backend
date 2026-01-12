@@ -1,4 +1,4 @@
-name: Deploy The Wild Oasis Backend
+name: Deploy Lodge Core Backend
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
               -p 8080:8080 \
               --env-file .env \
               --restart unless-stopped \
-              --network the-wild-oasis-net \
+              --network lodge-core-net \
               ${{ env.DOCKER_IMAGE_NAME }}
             
             echo "Deployment completed!"

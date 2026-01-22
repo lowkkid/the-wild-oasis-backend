@@ -13,7 +13,7 @@ public class MockDataJob {
 
     private final MockDataService mockDataService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void execute() {
         log.info("Starting daily mock data loading...");
         try {

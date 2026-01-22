@@ -1,5 +1,6 @@
 package com.github.lowkkid.lodgecore.minio.service.impl;
 
+import com.github.lowkkid.lodgecore.common.exception.StorageException;
 import com.github.lowkkid.lodgecore.minio.service.MinioService;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
@@ -42,7 +43,7 @@ public class MinioServiceImpl implements MinioService {
             minioClient.putObject(args);
             return generateDownloadUrl(objectNameWithExtension);
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
+            throw new StorageException("Failed to upload file: " + objectNameWithExtension, e);
         }
     }
 
@@ -55,7 +56,7 @@ public class MinioServiceImpl implements MinioService {
                     .build();
             minioClient.removeObject(args);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete file", e);
+            throw new StorageException("Failed to delete file: " + objectName, e);
         }
     }
 
@@ -72,12 +73,12 @@ public class MinioServiceImpl implements MinioService {
                             .build()
             );
         } catch (Exception e) {
-            throw new RuntimeException("Failed to generate download URL", e);
+            throw new StorageException("Failed to generate download URL for: " + objectName, e);
         }
     }
 
     @Retryable(
-            retryFor = RuntimeException.class,
+            retryFor = StorageException.class,
             backoff = @Backoff(delay = 500, multiplier = 2)
     )
     @Override

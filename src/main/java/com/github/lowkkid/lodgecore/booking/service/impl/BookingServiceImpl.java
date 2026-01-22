@@ -42,7 +42,7 @@ public class BookingServiceImpl implements BookingService {
             String sortField,
             Sort.Direction sortDirection) {
         return bookingRepository.findAllWithCabinsAndGuests(
-                status, PageRequest.of(--pageNumber, pageSize, Sort.by(sortDirection, sortField)));
+                status, PageRequest.of(pageNumber - 1, pageSize, Sort.by(sortDirection, sortField)));
     }
 
     @Override

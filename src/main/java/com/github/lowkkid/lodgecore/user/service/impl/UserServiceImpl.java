@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     public Page<UserDTO> findAllDtoByRole(
             UserRole role, Integer pageNumber, Integer pageSize, String sortField, Sort.Direction sortDirection) {
         return userRepository.findAllByRole(
-                role, PageRequest.of(--pageNumber, pageSize, Sort.by(sortDirection, sortField)))
+                role, PageRequest.of(pageNumber - 1, pageSize, Sort.by(sortDirection, sortField)))
                 .map(userMapper::toUserDTO);
     }
 

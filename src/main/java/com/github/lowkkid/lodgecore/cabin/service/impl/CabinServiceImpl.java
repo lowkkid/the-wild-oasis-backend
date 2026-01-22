@@ -11,6 +11,7 @@ import com.github.lowkkid.lodgecore.cabin.model.CabinDTO;
 import com.github.lowkkid.lodgecore.cabin.model.CabinEditRequest;
 import com.github.lowkkid.lodgecore.cabin.service.CabinService;
 import com.github.lowkkid.lodgecore.common.exception.NotFoundException;
+import com.github.lowkkid.lodgecore.common.exception.StorageException;
 import com.github.lowkkid.lodgecore.minio.service.MinioService;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -115,7 +116,7 @@ public class CabinServiceImpl implements CabinService {
             cabinRepository.saveAll(allCabins);
             return !hasErrors.get();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new StorageException("Failed to refresh cabin images", e);
         }
     }
 }

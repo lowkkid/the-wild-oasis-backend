@@ -9,8 +9,6 @@ public interface CabinService {
 
     List<CabinDTO> getAll();
 
-    CabinDTO getById(Long id);
-
     CabinDTO create(CabinCreateRequest cabinCreateRequest);
 
     CabinDTO update(Long id, CabinEditRequest request);

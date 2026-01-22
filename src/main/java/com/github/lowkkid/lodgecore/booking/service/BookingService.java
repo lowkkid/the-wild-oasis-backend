@@ -31,9 +31,5 @@ public interface BookingService {
 
     void checkout(Long id);
 
-    BookingDTO create(BookingDTO bookingDTO);
-
-    BookingDTO update(Long id, BookingDTO bookingDTO);
-
     void delete(Long id);
 }

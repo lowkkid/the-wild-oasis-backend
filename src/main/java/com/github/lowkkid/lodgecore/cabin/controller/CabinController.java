@@ -32,12 +32,6 @@ public class CabinController {
         return ResponseEntity.ok(cabins);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CabinDTO> getById(@PathVariable Long id) {
-        CabinDTO cabin = cabinService.getById(id);
-        return ResponseEntity.ok(cabin);
-    }
-
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CabinDTO> create(@ModelAttribute @Valid CabinCreateRequest request) {
         CabinDTO createdCabin = cabinService.create(request);

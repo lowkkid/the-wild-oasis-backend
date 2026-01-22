@@ -40,13 +40,6 @@ public class CabinServiceImpl implements CabinService {
     }
 
     @Override
-    public CabinDTO getById(Long id) {
-        Cabin cabin = cabinRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format(RESOURCE_WITH_ID_NOT_FOUND, "Cabin", id)));
-        return cabinMapper.toDto(cabin);
-    }
-
-    @Override
     @Transactional
     public CabinDTO create(CabinCreateRequest cabinCreateRequest) {
         Cabin cabin = cabinMapper.toEntity(cabinCreateRequest);

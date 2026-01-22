@@ -13,10 +13,8 @@ import com.github.lowkkid.lodgecore.booking.model.DailyActivity;
 import com.github.lowkkid.lodgecore.booking.model.DailyBookingSales;
 import com.github.lowkkid.lodgecore.booking.model.StaySummary;
 import com.github.lowkkid.lodgecore.booking.service.BookingService;
-import com.github.lowkkid.lodgecore.cabin.domain.repository.CabinRepository;
 import com.github.lowkkid.lodgecore.common.exception.AlreadyExistsException;
 import com.github.lowkkid.lodgecore.common.exception.NotFoundException;
-import com.github.lowkkid.lodgecore.guest.domain.repository.GuestRepository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -34,8 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
-    private final CabinRepository cabinRepository;
-    private final GuestRepository guestRepository;
     private final BookingMapper bookingMapper;
 
     @Override
@@ -118,41 +114,6 @@ public class BookingServiceImpl implements BookingService {
         }
 
         booking.setStatus(BookingStatus.CHECKED_OUT);
-    }
-
-    @Override
-    @Transactional
-    public BookingDTO create(BookingDTO bookingDTO) {
-        Booking booking = bookingMapper.toEntity(bookingDTO);
-
-        booking.setCabin(cabinRepository.findById(bookingDTO.getCabin().getId())
-                .orElseThrow(() -> new NotFoundException(
-                        String.format(RESOURCE_WITH_ID_NOT_FOUND, "Cabin", bookingDTO.getCabin().getId()))));
-        booking.setGuest(guestRepository.findById(bookingDTO.getGuest().getId())
-                .orElseThrow(() -> new NotFoundException(
-                        String.format(RESOURCE_WITH_ID_NOT_FOUND, "Guest", bookingDTO.getGuest().getId()))));
-
-        Booking savedBooking = bookingRepository.save(booking);
-        return bookingMapper.toDto(savedBooking);
-    }
-
-    @Override
-    @Transactional
-    public BookingDTO update(Long id, BookingDTO bookingDTO) {
-        var existingBooking = getEntityById(id);
-
-        Booking booking = bookingMapper.toEntity(bookingDTO);
-        booking.setId(existingBooking.getId());
-
-        booking.setCabin(cabinRepository.findById(bookingDTO.getCabin().getId())
-                .orElseThrow(() -> new NotFoundException(String.format(
-                        RESOURCE_WITH_ID_NOT_FOUND, "Cabin", bookingDTO.getCabin().getId()))));
-        booking.setGuest(guestRepository.findById(bookingDTO.getGuest().getId())
-                .orElseThrow(() -> new NotFoundException(
-                        String.format(RESOURCE_WITH_ID_NOT_FOUND, "Guest", bookingDTO.getGuest().getId()))));
-
-        Booking savedBooking = bookingRepository.save(booking);
-        return bookingMapper.toDto(savedBooking);
     }
 
     @Override
